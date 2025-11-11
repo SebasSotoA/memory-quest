@@ -8,22 +8,27 @@ import { GradientOverlay } from '@/components/GradientOverlay';
 import { PixelButton } from '@/components/PixelButton';
 import { MoreContent } from '@/components/MoreContent';
 import { GameColors } from '@/constants/gameColors';
+import { useBackgroundMusic } from '@/providers/BackgroundMusicProvider';
 
 /**
  * Pantalla de información técnica
  * Muestra información sobre las tecnologías usadas
  */
 export default function MoreScreen() {
+  const { ensurePlaying, pause } = useBackgroundMusic();
   const soundRef = useRef<Audio.Sound | null>(null);
 
   useEffect(() => {
+    void ensurePlaying('menu');
+    
     return () => {
+      void pause();
       if (soundRef.current) {
         soundRef.current.unloadAsync().catch(() => {});
         soundRef.current = null;
       }
     };
-  }, []);
+  }, [ensurePlaying, pause]);
 
   const playBackSound = useCallback(async () => {
     try {

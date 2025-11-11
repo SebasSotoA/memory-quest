@@ -344,7 +344,7 @@ export default function GameScreen() {
   // Calcular el ancho disponible considerando el padding del contenedor
   // El scrollContent tiene paddingHorizontal, así que lo consideramos
   const containerPadding = horizontalPadding * 2;
-  const availableWidth = (screenWidth - containerPadding) * scaleFactor;
+  const availableWidth = screenWidth - containerPadding;
   
   // Calcular el ancho de cada carta para que quepan exactamente en el espacio disponible
   const totalGapWidth = gap * (cardsPerRow - 1);
@@ -518,7 +518,7 @@ const styles = StyleSheet.create({
   grid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     alignItems: 'flex-start',
     alignContent: 'flex-start',
   },

@@ -8,22 +8,27 @@ import { GradientOverlay } from '@/components/GradientOverlay';
 import { PixelButton } from '@/components/PixelButton';
 import { CreditsContent } from '@/components/CreditsContent';
 import { GameColors } from '@/constants/gameColors';
+import { useBackgroundMusic } from '@/providers/BackgroundMusicProvider';
 
 /**
  * Pantalla de créditos del juego
  * Muestra información sobre los desarrolladores
  */
 export default function CreditsScreen() {
+  const { ensurePlaying, pause } = useBackgroundMusic();
   const soundRef = useRef<Audio.Sound | null>(null);
 
   useEffect(() => {
+    void ensurePlaying('menu');
+    
     return () => {
+      void pause();
       if (soundRef.current) {
         soundRef.current.unloadAsync().catch(() => {});
         soundRef.current = null;
       }
     };
-  }, []);
+  }, [ensurePlaying, pause]);
 
   const playBackSound = useCallback(async () => {
     try {

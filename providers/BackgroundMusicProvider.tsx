@@ -54,15 +54,19 @@ export function BackgroundMusicProvider({ children }: { children: React.ReactNod
       return soundRef.current;
     }
 
-    // Si hay un sonido cargado diferente, detenerlo y descargarlo
+    // Si hay un sonido cargado diferente, detenerlo y descargarlo completamente
     if (soundRef.current) {
       try {
-        await soundRef.current.stopAsync();
+        const status = await soundRef.current.getStatusAsync();
+        if (status.isLoaded && status.isPlaying) {
+          await soundRef.current.stopAsync();
+        }
         await soundRef.current.unloadAsync();
       } catch (error) {
         // Ignorar errores al descargar
       }
       soundRef.current = null;
+      currentTrackRef.current = null;
     }
 
     try {

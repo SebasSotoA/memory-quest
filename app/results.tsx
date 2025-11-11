@@ -12,11 +12,13 @@ import { useScore } from '@/hooks/useScore';
 import { GameColors } from '@/constants/gameColors';
 import { GameFonts } from '@/constants/gameFonts';
 import { Platform } from 'react-native';
+import { useBackgroundMusic } from '@/providers/BackgroundMusicProvider';
 
 export default function ResultsScreen() {
   const router = useRouter();
   const params = useLocalSearchParams();
   const { bestRecord } = useScore();
+  const { pause } = useBackgroundMusic();
   const buttonSoundRef = useRef<Audio.Sound | null>(null);
   const backSoundRef = useRef<Audio.Sound | null>(null);
   const winSoundRef = useRef<Audio.Sound | null>(null);
@@ -29,8 +31,10 @@ export default function ResultsScreen() {
   const won = params.won === 'true';
   const lives = parseInt(params.lives as string, 10) || 0;
 
-  // Precargar sonidos y reproducir sonido de resultado al montar el componente
+  // Pausar música de fondo y precargar sonidos al montar el componente
   useEffect(() => {
+    void pause(); // Pausar música de fondo del juego
+    
     const loadSoundsAndPlay = async () => {
       try {
         // Precargar sonido de botón
