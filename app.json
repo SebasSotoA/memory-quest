@@ -4,22 +4,22 @@
     "slug": "app_moviles_juego",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/icon/icon_foreground.png",
     "scheme": "appmovilesjuego",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "icon": "./assets/images/icon/icon_foreground.png"
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/images/android-icon-foreground.png",
-        "backgroundImage": "./assets/images/android-icon-background.png",
-        "monochromeImage": "./assets/images/android-icon-monochrome.png"
+        "backgroundColor": "#14532D",
+        "foregroundImage": "./assets/images/icon/icon_foreground.png"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.fintuapp.mbdcardgame"
     },
     "web": {
       "output": "static",
@@ -30,19 +30,27 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-icon.png",
-          "imageWidth": 200,
-          "resizeMode": "contain",
-          "backgroundColor": "#ffffff",
+          "backgroundColor": "#14532D",
+          "image": "./assets/images/splash/splash-icon-light.png",
           "dark": {
-            "backgroundColor": "#000000"
-          }
+            "image": "./assets/images/splash/splash-icon-light.png",
+            "backgroundColor": "#14532D"
+          },
+          "imageWidth": 200,
+          "resizeMode": "contain"
         }
       ]
     ],
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "28a55056-6bca-4dc1-8c3f-456ad9de948f"
+      }
+    },
+    "owner": "sotrix"
   }
 }
